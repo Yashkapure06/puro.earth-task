@@ -42,8 +42,11 @@ cd puro.earth
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
 
-cd backend && npm install && cd ..
-cd frontend && npm install && cd ..
+cd backend && npm install
+nodemon
+
+cd frontend && npm install
+npm run dev
 ```
 
 ## Environment variables
