@@ -22,9 +22,9 @@ flowchart TB
 
 The browser talks to Express with a signed cookie. Express does not take a source account id from the client. It loads the account from the logged-in user, then the services talk to Postgres. In-bank transfers lock both rows in id order so two people cannot deadlock. If it is outbound I only lock your account.
 
-I split `frontend/` and `backend/` because they are two processes anyway. Express because that is the HTTP stack I can actually defend in the interview. TanStack Query for server state. I did not use Redux.
+I split `frontend/` and `backend/` because they are two processes anyway. Express because that is the HTTP stack. TanStack Query for server state. I did not use Redux.
 
-I used Drizzle because I wanted TypeScript types without losing the SQL. A transfer has to lock rows (`FOR UPDATE`) and either fully commit or fully roll back. I wanted to read that query in the file, not guess what an ORM was doing. Prisma is fine for normal CRUD. This bit is the lock.
+I used Drizzle because I wanted TypeScript types without losing the SQL. A transfer has to lock rows (`FOR UPDATE`) and either fully commit or fully roll back. I wanted to read that query in the file, not guess what an ORM was doing. Prisma is fine for normal CRUD.
 
 ---
 
@@ -48,7 +48,7 @@ cd frontend && npm install && cd ..
 
 ## Environment variables
 
-Copy the sample files to `.env` in the same folders. 
+Copy the sample files to `.env` in the same folders.
 
 [`backend/.env.example`](backend/.env.example):
 
@@ -63,16 +63,16 @@ SESSION_SECRET=dev-session-secret-change-in-production
 
 ```
 # Leave empty to use the /api proxy in npm run dev.
-VITE_API_URL=
+VITE_API_URL=http://localhost:8081
 ```
 
-| Variable | File | Purpose |
-| --- | --- | --- |
-| `DATABASE_URL` | `backend/.env` | Postgres. Default port is **5432**. |
-| `PORT` | `backend/.env` | API. Default `8081`. |
-| `FRONTEND_URL` | `backend/.env` | CORS. Has to match Vite: `http://localhost:5173`. |
-| `SESSION_SECRET` | `backend/.env` | Signs the session cookie. |
-| `VITE_API_URL` | `frontend/.env` | Leave empty in dev. Vite proxies `/api` to `:8081`. |
+| Variable         | File            | Purpose                                             |
+| ---------------- | --------------- | --------------------------------------------------- |
+| `DATABASE_URL`   | `backend/.env`  | Postgres. Default port is **5432**.                 |
+| `PORT`           | `backend/.env`  | API. Default `8081`.                                |
+| `FRONTEND_URL`   | `backend/.env`  | CORS. Has to match Vite: `http://localhost:5173`.   |
+| `SESSION_SECRET` | `backend/.env`  | Signs the session cookie.                           |
+| `VITE_API_URL`   | `frontend/.env` | Leave empty in dev. Vite proxies `/api` to `:8081`. |
 
 ## Database and seed data
 
@@ -87,11 +87,11 @@ That runs migrations and puts in the demo users.
 
 Password for every demo user is **`demo-pass`**.
 
-| Role | Name | Email | In-bank payee |
-| --- | --- | --- | --- |
-| Admin | Puro Admin | admin@puro.earth.task.com | Cannot move money |
-| Customer | Yash Kapure | yash@puro.earth.task.com | `04-00-11` / `20481233` · £4,280.50 |
-| Customer | Alex Morgan | alex@puro.earth.task.com | `04-00-11` / `31975512` · £1,750.00 |
+| Role     | Name        | Email                     | In-bank payee                       |
+| -------- | ----------- | ------------------------- | ----------------------------------- |
+| Admin    | Puro Admin  | admin@puro.earth.task.com | Cannot move money                   |
+| Customer | Yash Kapure | yash@puro.earth.task.com  | `04-00-11` / `20481233` · £4,280.50 |
+| Customer | Alex Morgan | alex@puro.earth.task.com  | `04-00-11` / `31975512` · £1,750.00 |
 
 To pay Alex in-bank use `04-00-11` / `31975512`. Outbound example: `11-11-11` / `11111111` (takes money off Yash, nothing is credited on our side). Demo PIN is `1234`.
 

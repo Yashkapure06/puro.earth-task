@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #f7f4ef;
+  --color-paper: #fffcf7;
+  --color-ink: #1c1917;
+  --color-muted: #78716c;
+  --color-hairline: #e7e5e4;
+  --color-background: #f7f4ef;
+  --color-foreground: #1c1917;
+  --color-border: #e7e5e4;
+  --color-primary: #1c1917;
+  --color-primary-foreground: #f7f4ef;
+  --color-destructive: #ff574a;
+  --color-debit: #ff574a;
+  --color-credit: #5cb003;
+  --text-md: 1rem;
+  --text-md--line-height: 1.5rem;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Source Serif 4", ui-serif, Georgia, serif;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-canvas);
+  -webkit-font-smoothing: antialiased;
+}
+
+@utility tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes puro-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes puro-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.puro-progress-fill {
+  transform-origin: left center;
+  animation-name: puro-progress;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: forwards;
+}
+
+.puro-step-current {
+  animation: puro-pulse 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puro-progress-fill {
+    animation: none;
+    transform: scaleX(1);
+  }
+
+  .puro-step-current {
+    animation: none;
+  }
+}
