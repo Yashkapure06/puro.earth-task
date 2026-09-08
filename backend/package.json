@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nodemon",
-    "build": "tsc",
-    "start": "node dist/server.js",
+    "dev": "node init && nodemon",
+    "build": "node init && tsc",
+    "start": "node init && node dist/server.js",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx src/db/migrate.ts",
     "db:seed": "tsx src/db/seed.ts",

@@ -80,13 +80,17 @@ export function LoginPage() {
 
           <p className="text-center text-sm text-muted">
             New customer?{" "}
-            <Link to="/register" className="text-ink underline-offset-4 hover:underline">
+            <Link
+              to="/register"
+              className="text-ink underline-offset-4 hover:underline"
+            >
               Open an account
             </Link>
           </p>
-          <p className="text-center text-xs text-muted">
+
+          {/* <p className="text-center text-xs text-muted">
             Demo: yash@puro.earth.task.com / demo-pass · admin@puro.earth.task.com / demo-pass
-          </p>
+          </p> */}
         </form>
       </div>
     </main>
